@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+app.use('/api', router);
+
 app.use((req, res, next) => {
   var err = new Error('Not Found');
   err.status = 404;
@@ -22,7 +24,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message);
 });
 
-app.use('/api', router);
 
 app.listen(3000, () => {
   console.log('Server is listening.')

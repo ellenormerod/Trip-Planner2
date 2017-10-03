@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "nodemon": "^1.12.1",
     "webpack": "^3.6.0"
   },
   "dependencies": {

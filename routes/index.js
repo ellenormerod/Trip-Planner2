@@ -3,11 +3,29 @@ const router = express.Router();
 const Promise = require('bluebird');
 const models = require('../models');
 const Hotels = models.Hotel;
-const Activity = models.Activity;
-const Restaurant = models.Restaurant;
-const Place = models.Place;
+const Activities = models.Activity;
+const Restaurants = models.Restaurant;
+const Places = models.Place;
 
-router.use('/api', (req, res) => {
+router.get('/', (req, res, next) => {
+  let allAttractions = {};
 
+  Hotels.findAll()
+  .then(allHotels => {
+    allAttractions.hotels = allHotels;
+    return Restaurants.findAll()
+  })
+  .then(allRestaurants => {
+    allAttractions.restaurants = allRestaurants;
+    return Activities.findAll()
+  })
+  .then(allActivities => {
+    allAttractions.activities = allActivities;
+  })
+  .then( () => {
+    res.json(allAttractions);
+  })
+  .catch(next);
 })
 
+module.exports = router;
