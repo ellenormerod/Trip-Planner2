@@ -599,6 +599,7 @@ const itineraryHotelList = document.getElementById('hotels-list');
 const itineraryRestaurantList = document.getElementById('restaurants-list');
 const itineraryActivitiesList = document.getElementById('activities-list');
 
+let cancelButtonArray = [];
 let selectedId;
 
 buttonsArray.forEach(eachButton => {
@@ -611,8 +612,15 @@ buttonsArray.forEach(eachButton => {
       selectedId = selectedHotel.value;
       let itineraryItem = document.createElement('li');
       let itineraryX = document.createElement('button');
+      itineraryX.classList.add('cancelButton');
+
       itineraryItem.append(selectedId);
+      itineraryItem.append(itineraryX);
       itineraryHotelList.append(itineraryItem);
+
+      itineraryX.onclick = () => {
+        itineraryItem.remove();
+      }
 
       arrayHotels.forEach(oneHotel => {
         if (oneHotel.name === selectedId) {
@@ -623,8 +631,15 @@ buttonsArray.forEach(eachButton => {
       selectedId = selectedRestaurant.value;
       let itineraryItem = document.createElement('li');
       let itineraryX = document.createElement('button');
+      itineraryX.classList.add('cancelButton');
+
       itineraryItem.append(selectedId);
+      itineraryItem.append(itineraryX);
       itineraryRestaurantList.append(itineraryItem);
+
+      itineraryX.onclick = () => {
+        itineraryItem.remove();
+      }
 
       arrayRestaurants.forEach(oneRestaurant => {
         if (oneRestaurant.name === selectedId) {
@@ -635,18 +650,28 @@ buttonsArray.forEach(eachButton => {
       selectedId = selectedActivity.value;
       let itineraryItem = document.createElement('li');
       let itineraryX = document.createElement('button');
+      itineraryX.classList.add('cancelButton');
+
       itineraryItem.append(selectedId);
       itineraryItem.append(itineraryX);
       itineraryActivitiesList.append(itineraryItem);
+
 
       arrayActivities.forEach(oneActivity => {
         if (oneActivity.name === selectedId) {
           buildMarker('activities', oneActivity.place.location).addTo(map);
         }
       })
+
+      itineraryX.onclick = () => {
+        itineraryItem.remove();
+      }
+
     }
   })
 })
+
+
 
 
 /***/ }),
