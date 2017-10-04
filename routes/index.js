@@ -10,14 +10,14 @@ const Places = models.Place;
 router.get('/', (req, res, next) => {
   let allAttractions = {};
 
-  Hotels.findAll()
+  Hotels.findAll({include: [ {all: true} ]})
   .then(allHotels => {
     allAttractions.hotels = allHotels;
-    return Restaurants.findAll()
+    return Restaurants.findAll({include: [ {all: true} ]})
   })
   .then(allRestaurants => {
     allAttractions.restaurants = allRestaurants;
-    return Activities.findAll()
+    return Activities.findAll({include: [ {all: true} ]})
   })
   .then(allActivities => {
     allAttractions.activities = allActivities;
